@@ -1,0 +1,51 @@
+""" This is the project's access point.
+"""
+import os
+import logging
+from src.logger_config import setup_logging
+from src.input_output import get_arguments
+from src.data_cleaning import get_data2df
+from src.tasks.classification.model import get_topics, get_topic_words
+from src.tasks.specialization.key_topics import get_key_topics
+
+# Set up logging configuration
+setup_logging()
+
+INPUT_FILEPATH = "data/RSC604/rsc_v6_0_4_open_web-export.txt"
+
+def main():
+    # Set up logging configuration
+    logger = logging.getLogger(__name__)
+    
+    # Get input arguments
+    args = get_arguments()
+    logger.info(f'Arguments: {args}')
+    
+    task = args.task
+    input_file_path = INPUT_FILEPATH
+    
+    # Execute the task
+    tasks = ["tm-eval",
+            "tm-topics",
+            "specialization",
+            "data"]
+    if task not in tasks:
+        logger.error(f'Task {task} not recognized.')
+        return
+    if task == "tm-eval":
+        logger.info("Getting topics...")
+        get_topics()
+        logger.info("Topic modeling complete.")
+    elif task == "tm-topics":
+        logger.info("Getting topic words...")
+        get_topic_words()
+        logger.info("Topic words extraction complete.")
+    elif task == "specialization":
+        get_key_topics()
+    elif task == "data":
+        logger.info("Data preprocessing...")
+        get_data2df(filename=input_file_path)
+        logger.info("Data preprocessing complete.")
+
+if __name__ == '__main__':
+    main()

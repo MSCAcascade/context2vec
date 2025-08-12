@@ -1,0 +1,17 @@
+universe                = docker
+docker_image            = docker.coli.uni-saarland.de/saguilar/python310:250728
+initialdir              = /nethome/saguilar
+executable              = /scratch/saguilar/SAGE/run.sh
+output                  = /scratch/saguilar/SAGE/logs/$(ClusterId)_$(Year)-$(Month)-$(Day)_$(SUBMIT_TIME).out
+error                   = /scratch/saguilar/SAGE/logs/$(ClusterId)_$(Year)-$(Month)-$(Day)_$(SUBMIT_TIME).err
+log                     = /scratch/saguilar/SAGE/logs/$(ClusterId)_$(Year)-$(Month)-$(Day)_$(SUBMIT_TIME).log
+requirements            = (TARGET.UidDomain == "coli.uni-saarland.de")
+request_cpus            = 8
+request_gpus            = 1
+gpus_minimum_capability = 7.0
+gpus_minimum_memory     = 8096
+gpus_minimum_runtime    = 12.4
+request_disk            = 32G
+request_memory          = 50G
++MaxWallTime            = 86400
+queue 1

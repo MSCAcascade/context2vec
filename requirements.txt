@@ -1,0 +1,29 @@
+tmtoolkit[recommended,lda,sklearn,gensim,topic_modeling_eval_extra] == 0.11.2
+numpy
+pandas
+scikit-learn
+gensim
+tqdm
+matplotlib
+seaborn
+plotly
+kaleido
+
+# PyTorch ecosystem for GNN-LLM (CPU versions - install with CUDA separately)
+torch>=2.0.0
+torchvision
+torchaudio
+torch-geometric
+torch-geometric-temporal
+
+# Additional dependencies for GNN-LLM
+scipy
+openai>=1.0.0
+
+# Installation instructions for CUDA support:
+# 1. Install PyTorch with CUDA first:
+#    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# 2. Install torch-geometric:
+#    pip install torch-geometric torch-geometric-temporal
+# 3. Install remaining dependencies:
+#    pip install -r requirements.txt

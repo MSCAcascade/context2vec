@@ -1,0 +1,13 @@
+# Data
+data/
+results/
+
+# Environment
+.env/
+env/
+.conda/
+.vscode/
+__pycache__/
+
+# Logs
+logs/

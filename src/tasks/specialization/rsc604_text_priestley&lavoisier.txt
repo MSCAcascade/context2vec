@@ -1,0 +1,272 @@
+105758	1760	Joseph Priestley
+105807	1760	Joseph Priestley
+105808	1760	Joseph Priestley
+105887	1770	Joseph Priestley
+105888	1770	Joseph Priestley
+106051	1770	Joseph Priestley|Wm Hey
+106051	1770	Joseph Priestley|Wm Hey
+106051	1770	Joseph Priestley|Wm Hey
+106057	1770	William Henly|J. Priestley
+106057	1770	William Henly|J. Priestley
+105987	1770	J. Priestley
+106016	1770	Mr. Nicholson|Joseph Priestley
+106016	1770	Mr. Nicholson|Joseph Priestley
+106020	1770	William Henly|Thomas Ronayne
+106020	1770	William Henly|Thomas Ronayne
+106020	1770	William Henly|Thomas Ronayne
+106175	1770	John Mervin Nooth
+106209	1770	Joseph Priestley
+106216	1770	Matthew Dobson
+106276	1770	Henry Cavendish
+106277	1770	Joseph Priestley
+106279	1770	John Ingenhousz
+106288	1770	John Hunter
+106297	1770	William Henly
+106231	1770	William Henly|Tiberius Cavallo
+106231	1770	William Henly|Tiberius Cavallo
+106237	1770	Joseph Huddart
+106319	1770	J. Haygarth
+106323	1770	W. White|John Fothergill
+106325	1770	John Boddington|Edward Nickson|Benjamin Wilson|John Pringle|Amherst|Charles Frederick|Chas. Cocks|W. Watson|H. Cavendish|W. Henly|S. Horsley|Ty. Lane|Mahon|Edwd. Nairne|J. Planta|Joseph Priestley
+106325	1770	John Boddington|Edward Nickson|Benjamin Wilson|John Pringle|Amherst|Charles Frederick|Chas. Cocks|W. Watson|H. Cavendish|W. Henly|S. Horsley|Ty. Lane|Mahon|Edwd. Nairne|J. Planta|Joseph Priestley
+106340	1770	Matthew Guthrie
+106423	1770	Matthew Guthrie
+106425	1770	Abbe Fontana|John Paradise
+106427	1770	John Ingen-Housz
+106427	1770	John Ingen-Housz
+106427	1770	John Ingen-Housz
+106427	1770	John Ingen-Housz
+106427	1770	John Ingen-Housz
+106427	1770	John Ingen-Housz
+106429	1770	Abbe Fontana
+106374	1780	William Cockin|Joseph Banks
+106374	1780	William Cockin|Joseph Banks
+106384	1780	Edward Nairne
+106384	1780	Edward Nairne
+106510	1780	Richard Kirwan
+106510	1780	Richard Kirwan
+106510	1780	Richard Kirwan
+106510	1780	Richard Kirwan
+106541	1780	Adair Crawford|Joseph Banks
+106541	1780	Adair Crawford|Joseph Banks
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106458	1780	Richard Kirwan
+106464	1780	William Withering|Joseph Priestley
+106464	1780	William Withering|Joseph Priestley
+106471	1780	John Ingen-Housz
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106478	1780	Richard Kirwan
+106483	1780	Mr. Cavendish
+106497	1780	Charles Blagden
+106498	1780	Joseph Priestley|Joseph Banks
+106498	1780	Joseph Priestley|Joseph Banks
+106498	1780	Joseph Priestley|Joseph Banks
+106576	1780	John Michell
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106582	1780	Henry Cavendish
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106583	1780	Richard Kirwan
+106584	1780	Henry Cavendish
+106584	1780	Henry Cavendish
+106584	1780	Henry Cavendish
+106584	1780	Henry Cavendish
+106585	1780	Richard Kirwan
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106594	1780	James Watt
+106596	1780	Josiah Wedgwood
+106754	1780	Mr. Morgan|Richard Price
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106758	1780	Joseph Priestley
+106766	1780	Henry Cavendish
+106617	1780	Richard Kirwan
+106617	1780	Richard Kirwan
+106617	1780	Richard Kirwan
+106634	1780	Josiah Wedgwood
+106705	1780	Abraham Bennet
+106706	1780	Abraham Bennet
+106716	1780	Benjamin Thompson
+106716	1780	Benjamin Thompson
+106716	1780	Benjamin Thompson
+106716	1780	Benjamin Thompson
+106718	1780	Mr. Brydone|Honourable Charles
+106726	1780	James Keir|Henry Cavendish
+106739	1780	John Hunter|Joseph Banks
+106653	1780	Joseph Priestley
+106660	1780	Henry Cavendish
+106660	1780	Henry Cavendish
+106662	1780	Joseph Priestley|W. Withering|James Keir
+106662	1780	Joseph Priestley|W. Withering|James Keir
+106666	1780	William Austin|Charles Blagden
+106666	1780	William Austin|Charles Blagden
+106666	1780	William Austin|Charles Blagden
+106666	1780	William Austin|Charles Blagden
+106677	1780	Joseph Priestley
+106677	1780	Joseph Priestley
+106677	1780	Joseph Priestley
+106677	1780	Joseph Priestley
+106677	1780	Joseph Priestley
+106686	1780	Joseph Priestley
+106698	1780	Joseph Priestley
+106699	1780	Isaac Milner
+106699	1780	Isaac Milner
+106825	1790	William Hey
+106830	1790	William Austin|Charles Blagden
+106830	1790	William Austin|Charles Blagden
+106830	1790	William Austin|Charles Blagden
+106830	1790	William Austin|Charles Blagden
+106830	1790	William Austin|Charles Blagden
+106830	1790	William Austin|Charles Blagden
+106833	1790	Joseph Priestley
+106842	1790	Josiah Wedgwood
+106845	1790	James Keir
+106845	1790	James Keir
+106865	1790	Thomas Beddoes
+106866	1790	Smithson Tennant
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106868	1790	Joseph Priestley
+106790	1790	George Pearson
+106790	1790	George Pearson
+106790	1790	George Pearson
+106790	1790	George Pearson
+106945	1790	William Hamilton
+106945	1790	William Hamilton
+107003	1790	Henry Brougham|Charles Blagden
+106919	1790	Smithson Tennant
+106919	1790	Smithson Tennant
+106919	1790	Smithson Tennant
+106919	1790	Smithson Tennant
+106929	1790	Benjamin Count of Rumford
+106935	1790	William Henry|Thomas Henry
+106936	1790	William Charles Wells
+106936	1790	William Charles Wells
+106936	1790	William Charles Wells
+106936	1790	William Charles Wells
+106936	1790	William Charles Wells
+106968	1790	George Pearson
+109562	1800	William Henry
+109562	1800	William Henry
+109646	1800	William Hasledine Pepys
+109648	1800	William Allen|William Hasledine Pepys
+109648	1800	William Allen|William Hasledine Pepys
+109650	1800	Alexander Marcet
+109650	1800	Alexander Marcet
+109651	1800	Humphry Davy
+109654	1800	Thomas Thomson
+109666	1800	W. Allen
+109666	1800	W. Allen
+107053	1800	Edward Howard
+107094	1800	Richard Chenevix
+107094	1800	Richard Chenevix
+107117	1800	Richard Chenevix
+107118	1800	Edward Howard|John Lloyd Williams|Count de Bournon
+107068	1800	William Henry
+107068	1800	William Henry
+107068	1800	William Henry
+107069	1800	Charles Hatchett
+107148	1800	Charles Hatchett
+107229	1800	Humphry Davy
+107243	1800	William Allen|William Hasledine Pepys
+107243	1800	William Allen|William Hasledine Pepys
+107243	1800	William Allen|William Hasledine Pepys
+107245	1800	Alexander Marcet
+107245	1800	Alexander Marcet
+107280	1800	Humphry Davy
+107280	1800	Humphry Davy
+107297	1800	W Allen|W. H. Pepys
+107297	1800	W Allen|W. H. Pepys
+107297	1800	W Allen|W. H. Pepys
+107302	1800	Humphry Davy
+107251	1800	Humphry Davy
