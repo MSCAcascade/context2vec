@@ -11,7 +11,7 @@ from src.tasks.specialization.key_topics import get_key_topics
 # Set up logging configuration
 setup_logging()
 
-INPUT_FILEPATH = "data/RSC604/rsc_v6_0_4_open_web-export.txt"
+INPUT_FILEPATH = "data/rsc_v6_0_4_open_web-export.txt"
 
 def main():
     # Set up logging configuration

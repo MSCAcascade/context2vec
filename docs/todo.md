@@ -22,25 +22,31 @@ Output: TF-IDF, citation graph?
 
 - [x] Dataset definition: RSC_V6_0_4_OPEN_WEB
     - Server: corpora.clarin-d.uni-saarland.de
-        - RSC_V6_0_1_OPEN_WEB
         - RSC_V6_0_4_OPEN_WEB --with topics (30)
-- [x] Sampling
-    - [x] Define target decades: 1600-1800
-    - [x] Filter documents within period: 17519(total) -> 5348
-        - CQP: 1600-1800
-            - `<text>[]::match.text_decade="16[0-9]{2}|17[0-9]{2}|1800"`
-            - `tabulate Last match text_id, match (feature) >"(filename)"`
-    - [x] Filter documents with oxy-terms hits
-        - [x] Define keywords pattern: 
+- [ ] Sampling
+    - [ ] Filter documents within period: 17519(total) -> 5348
+        - [x] Define time parameters
+            - target period: 1750-1800
+            - intervals: 5 years
+        - #NOTE With CQP (1750-1800)
+            - `<text>[]::match.text_year="1750|17[5-9][0-9]|1800"`
+            - `tabulate Last match text_id, match [feature] >"[filename]"`
+            - Features: year, author, title, doiLink, primaryTopic, secondaryTopic
+    - [ ] Filter documents with oxy-terms hits: 
+        - [x] Define keywords pattern:
+            - Python
             `r'\w*oxyge\w*|\w*phlogist\w*|\w*acid\w*|water\w*|gas\w*|\w*hydro\w*|substance\w*|solution\w*|\w*oxid\w*|compound\w*|muriatic\w*|\w*combust\w*|\w*flam\w*|electric\w*|lumin\w*|ether|caloric|air|heat|fire|energy|\w*radical\w*|potential\w*|metal\w*'`
+            - CQP
+            `[word = ".*oxyge.*|.*phlogist.*|.*acid.*|water.*|gas.*|.*hydro.*|substance.*|solution.*|.*oxid.*|compound.*|muriatic.*|.*combust.*|.*flam.*|electric.*|lumin.*|ether|caloric|air|heat|fire|energy|.*radical.*|potential.*|metal.*"]`
             - Based on Stefania's study using KLD: https://aclanthology.org/2021.latechclfl-1.14
                 - Keywords: ``[word ="oxyge.*|phlogiston|dephlogisticated|acid|water|gas|hydrogen.*|substance|solution|oxide|compound|muriatic"]``
                 - Names: Priestley-> Pearson, Pearson->Chevenix, Davy, Henry (see Fig. 2)
             - Based on ChemRevo epistemic objects article: https://doi.org/10.1007/s10670-011-9340-9
                 - Keywords: **oxygen**, **phlogiston**, **caloric**, **acidity**, **dephlogisticated** **air**, **fire** air, **combustion**, **energy**, **potential**, **muriatic**, **electricity**, **radical**, **hydrogen**, **gas**, **luminiferous** **ether**, **metal**
                 - Names: Lavoisier, Priestley, Wilhelm Scheele
-    - [x] Visualizations
-        - [x] Get papers distribution by decade
+    - [ ] For each 5-years interval, create corpus: 10 total
+    - [ ] Visualizations
+        - [ ] Get papers distribution by decade
 - [x] Quality of vocabulary
     - [x] Pre-cleaning
         - [ ] *Filter all uppercase words -> citations* --deprecated: future work
