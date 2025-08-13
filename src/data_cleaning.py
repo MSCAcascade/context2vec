@@ -135,8 +135,8 @@ def get_data2df(filename):
     merged_df = merged_df.drop(merged_df.index[not_oxy_terms])
     logger.info(f'Total articles with oxy-terms: {merged_df.shape}')
     
-    logger.debug("Visualizing publications by decade...")
-    u.plot_papers4decade(merged_df)
+    # logger.debug("Visualizing publications by decade...")
+    # u.plot_papers4decade(merged_df)
     
     # NOTE: Uncomment to filter all uppercase words, commonly author names
     # logger.info("Filtering uppercase tokens..")
@@ -163,7 +163,7 @@ def get_data2df(filename):
     # Creating DF subsets for each decade (cumulative, non-cumulative)
     logger.info("5-Cleaning data round 2...")
     
-    intervals = np.arange(1750, 1801, 5)
+    intervals = np.arange(1750, 1806, 5)
     decades = [f"{start}-{start+4}" for start in intervals[:-1]]
     logger.debug(f'Decades: {decades}')
     merged_df['decade'] = pd.cut(merged_df['year'], bins=intervals, labels=decades, right=False)
