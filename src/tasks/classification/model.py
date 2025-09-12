@@ -1,6 +1,7 @@
 # Internal
 from src.tasks.classification.eval import models_evaluation
 from src import utils as u
+from src.tasks.specialization import entropy as ent
 # Reporting
 import random
 random.seed(42)
@@ -241,13 +242,19 @@ def get_treemap_for_topics(topic_words_df, results_dir):
         word_prob_df['Probability'] = word_prob_df['Probability'].astype(float)
         logger.debug('Word probability DF shape: %s', word_prob_df.shape)
 
+        # Extract only the topic label without the number prefix
+        clean_topic_label = col.split('_', 1)[1] if '_' in col else col
+        
+        
         fig = px.treemap(word_prob_df, 
                         path=['Word'], 
                         values='Probability', 
                         color='Probability',
                         color_continuous_scale='RdBu',
-                        title=f'Topic "{col}" top 50 words',
+                        title=f'Topic "{clean_topic_label}" top 50 words',
                         color_continuous_midpoint=np.average(word_prob_df['Probability']))
         fig.update_layout(paper_bgcolor='white', plot_bgcolor='white', margin=dict(l=0, r=0, t=40, b=0))
         fig.write_image(f'{results_dir}/treemap_topic_{col}.png')
         logger.info('Saved treemap for topic %s', col)
+        
+

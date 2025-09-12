@@ -13,9 +13,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def plot_papers4decade(df):
+def plot_papers4decade(filename):
     # NOTE: Uncomment and change parameter if input = filepath
-    # df = pd.read_csv(filename, sep='\t', header=None, names=['textId', 'decade'])
+    df = pd.read_csv(filename)
+    
+    decades = ['1750', '1760', '1770', '1780', '1790', '1800']
+    # Convert 'decade' column to string if it is not already
+    if df['decade'].dtype != 'object':
+        df['decade'] = df['decade'].astype(str)
+    # Drop rowns which decade is not in decades
+    df = df[df['decade'].isin(decades)]
     
     # Count number of papers per decade
     df_count = df['decade'].value_counts().reset_index()
@@ -23,24 +30,24 @@ def plot_papers4decade(df):
     # Sort by decade
     df_count = df_count.sort_values(by='decade')
     # Plotting
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(7, 6))
     sns.lineplot(x='decade', y='count', data=df_count, marker='o', color='blue')
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=45, ha='right', fontsize=12)
+    plt.yticks(fontsize=12)
     plt.grid(True)
     plt.tight_layout()
     total_papers = df_count['count'].sum() # Create legend with N = total papers
-    plt.legend([f'N: {total_papers}'])
-    plt.title('Publications per decade')
-    plt.xlabel('decade')
-    plt.ylabel('counts')
-    plt.xticks(rotation=45)
+    plt.legend([f'N: {total_papers}'], fontsize=12)
+    plt.title('Publications per decade', fontsize=16)
+    plt.xlabel('decade', fontsize=14)
+    plt.ylabel('counts', fontsize=14)
     plt.tight_layout()
     
     # Save plot
     results_folder = 'results'
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
-    plot_path = os.path.join(results_folder, 'publications_per_decade.png')
+    plot_path = os.path.join(results_folder, 'publications_per_decade_1750to1800.png')
     plt.savefig(plot_path)
     logger.debug(f'Plot saved to {plot_path}')
 

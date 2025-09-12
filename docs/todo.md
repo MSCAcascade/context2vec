@@ -5,16 +5,15 @@ Tasks:
 2. Identification of contextual factors driving revolutionary change
 
 # Python environment
-- [X] Define dependencies in requirements.txt: Python version 3.11 for data(don't install tmtoolkit packages for extra metrics), 3.10 for the rest
+- [X] Define dependencies in requirements.txt: Python version 3.10
     - [x] Create env with conda: 
         - `conda create --name myenvironment python=3.10`
         - `pip install -r requirements.txt`
     - [x] Complete tmtoolkit setup: `python -m tmtoolkit setup en`
 - [x] Clone KnowFormer
-- [ ] #TODO: Application replicability
-    - [ ] add data/results to zenodo, code to github
-    - [ ] add dockerfile to github, describe setup with bash script in README
+- [ ] Application replicability
     - [ ] create config file w/inputs filenames
+    - [ ] update bash script for general use
 
 # Pre-processing
 Input: corpus, metadata (authors, decade)
@@ -22,31 +21,25 @@ Output: TF-IDF, citation graph?
 
 - [x] Dataset definition: RSC_V6_0_4_OPEN_WEB
     - Server: corpora.clarin-d.uni-saarland.de
+        - RSC_V6_0_1_OPEN_WEB
         - RSC_V6_0_4_OPEN_WEB --with topics (30)
-- [ ] Sampling
-    - [ ] Filter documents within period: 17519(total) -> 5348
-        - [x] Define time parameters
-            - target period: 1750-1800
-            - intervals: 5 years
-        - #NOTE With CQP (1750-1800)
-            - `<text>[]::match.text_year="1750|17[5-9][0-9]|1800"`
-            - `tabulate Last match text_id, match [feature] >"[filename]"`
-            - Features: year, author, title, doiLink, primaryTopic, secondaryTopic
-    - [ ] Filter documents with oxy-terms hits: 
-        - [x] Define keywords pattern:
-            - Python
+- [x] Sampling
+    - [x] Define target decades: 1600-1800
+    - [x] Filter documents within period: 17519(total) -> 5348
+        - CQP: 1600-1800
+            - `<text>[]::match.text_decade="16[0-9]{2}|17[0-9]{2}|1800"`
+            - `tabulate Last match text_id, match (feature) >"(filename)"`
+    - [x] Filter documents with oxy-terms hits
+        - [x] Define keywords pattern: 
             `r'\w*oxyge\w*|\w*phlogist\w*|\w*acid\w*|water\w*|gas\w*|\w*hydro\w*|substance\w*|solution\w*|\w*oxid\w*|compound\w*|muriatic\w*|\w*combust\w*|\w*flam\w*|electric\w*|lumin\w*|ether|caloric|air|heat|fire|energy|\w*radical\w*|potential\w*|metal\w*'`
-            - CQP
-            `[word = ".*oxyge.*|.*phlogist.*|.*acid.*|water.*|gas.*|.*hydro.*|substance.*|solution.*|.*oxid.*|compound.*|muriatic.*|.*combust.*|.*flam.*|electric.*|lumin.*|ether|caloric|air|heat|fire|energy|.*radical.*|potential.*|metal.*"]`
             - Based on Stefania's study using KLD: https://aclanthology.org/2021.latechclfl-1.14
                 - Keywords: ``[word ="oxyge.*|phlogiston|dephlogisticated|acid|water|gas|hydrogen.*|substance|solution|oxide|compound|muriatic"]``
                 - Names: Priestley-> Pearson, Pearson->Chevenix, Davy, Henry (see Fig. 2)
             - Based on ChemRevo epistemic objects article: https://doi.org/10.1007/s10670-011-9340-9
                 - Keywords: **oxygen**, **phlogiston**, **caloric**, **acidity**, **dephlogisticated** **air**, **fire** air, **combustion**, **energy**, **potential**, **muriatic**, **electricity**, **radical**, **hydrogen**, **gas**, **luminiferous** **ether**, **metal**
                 - Names: Lavoisier, Priestley, Wilhelm Scheele
-    - [ ] For each 5-years interval, create corpus: 10 total
-    - [ ] Visualizations
-        - [ ] Get papers distribution by decade
+    - [x] Visualizations
+        - [x] Get papers distribution by decade
 - [x] Quality of vocabulary
     - [x] Pre-cleaning
         - [ ] *Filter all uppercase words -> citations* --deprecated: future work
@@ -76,6 +69,8 @@ Output: TF-IDF, citation graph?
                     - CQP: `[word = "(?i)\bLavoisier\b"]`
                     - #NOTE: Referenced authors were written in uppercase
     - [ ] #TODO: Visualizations
+        - [ ] Plot vocabulary size by decade
+            - Does it increase/decrease? At which rate?
         - [ ] Plot oxy-terms distribution by decade
 
 ## Observations
@@ -137,41 +132,28 @@ Output: M1 (doc x term), M2 (doc x topic), M3 (topic x term)
         2. `metric_coherence_mimno_2011`-Topic coherence: Mimno et al. 2011. Optimizing semantic coherence in topic models.
     - #REVIEW: Other useful topic metrics: https://arxiv.org/pdf/2005.10125
 
-- [x] Topic model evaluation
-    - [x] Define optimal number of topics (best_k) per decade: [6,6,6,6,6,6]
-        - [x] Plot metrics from min_topic-max_topic(=30)
-        - [x] Define best_k for each decade
-- [x] Topic model
-    - [x] Get topic words
-        - [x] Apply LDA model with best_k for each decade
-    - [x] Get topic labels
-- [x] Visualization
-    - [x] Cosine similarity/JSD heatmaps of topics per decade
-        - #REVIEW: Which topics are similar to "oxygen" over time? What are their top words?
+- [ ] Topic model evaluation
+    - [ ] Define optimal number of topics (best_k) per decade
+        - [x] Plot metrics from min_topic-max_topic
+        - [ ] Define best_k for each decade
+- [ ] Topic model
+    - [ ] Get topics
+        - [ ] Apply LDA model with best_k for each decade
+    - [ ] Get topic labels
+- [ ] Visualization
+    - [ ] Heatmap of topics/decade: how different are the decades between each other?
 
 #REVIEW: SOTA method for classification of scholarly documents is contrastive learning based on citations. However, in the RSC we don't have a referentiation format during the target centuries. Hence, we will use topics for now to estimate the classes. Future work will address this limitation.
 
 ## Observations
 
-- Running the model with max_topics = 100 doesn't make sense since the ref LDA model has a max no. of 30.
-- Approaches comparison:
-    - w-past: no acid topic
-    - wo-past: acid topic
-    - #NOTE: the cumulative approach starts from 1750 (papers before that are not considered in the analysis)
-
 ## Results
-
-- #REVIEW: our model has symmetric alpha
 
 # Specialization
 Input: edge index (A, relationship_type, B)
 Output: knowledge graph
 
-- [x] Select graph construction approach: GCNConv from PyTorch Geometric
+- [x] Select graph construction approach
     - KnowFormer is a GAT, we can find the relevant nodes using attentional weights
-    - General TemporalGCN
 - #NOTE: Stefania: Measuring paradigmatic change using entropy--high entropy is linked to cluster dynamics/transfer, low entropy is linked to one term driving the paradigm
 - #NOTE: Stefania: Alignment of document-level and word-level strategy: there will be a period of stabilization (high entropy-> low entropy)
-
-- [ ] Define important documents
-    - Texts that mention

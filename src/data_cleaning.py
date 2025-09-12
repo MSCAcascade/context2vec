@@ -19,8 +19,9 @@ import string
 from tmtoolkit.corpus import (Corpus, save_corpus_to_picklefile, load_corpus_from_picklefile, print_summary, lemmatize, filter_for_pos, to_lowercase, remove_punctuation, filter_clean_tokens, remove_common_tokens, remove_uncommon_tokens, tokens_table, dtm)
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
-LIMIT = 20
-TEXTS_INPERIOD = "./data/rscv604_textId_year"
+LIMIT = None
+TEXTS_INPERIOD = "./data/RSC604/rsc604_texts_16to18"
+TEXTS_TOPICS = "./data/RSC604/rsc604_primaryTopic_16to18"
 SAVE_PATH = "results"
 CPUS = 4
 
@@ -114,10 +115,10 @@ def get_data2df(filename):
     articles = extract_articles(text)
     logger.info(f'Extracted {len(articles)} articles.')
     
-    # Sampling by range (1750-1800)
+    # Sampling by range (1600-1800)
     df = pd.DataFrame(articles, columns=['text_id', 'article_text'])
     logger.info(f'2-Sampling decades based on {TEXTS_INPERIOD}...')
-    df_inperiod = pd.read_csv(TEXTS_INPERIOD, sep='\t', header=None, names=['text_id', 'year'])
+    df_inperiod = pd.read_csv(TEXTS_INPERIOD, sep='\t', header=None, names=['text_id', 'decade'])
     df['text_id'] = df['text_id'].astype(str)
     df_inperiod['text_id'] = df_inperiod['text_id'].astype(str)
     merged_df = pd.merge(df, df_inperiod, on='text_id')
@@ -135,8 +136,8 @@ def get_data2df(filename):
     merged_df = merged_df.drop(merged_df.index[not_oxy_terms])
     logger.info(f'Total articles with oxy-terms: {merged_df.shape}')
     
-    # logger.debug("Visualizing publications by decade...")
-    # u.plot_papers4decade(merged_df)
+    logger.debug("Visualizing publications by decade...")
+    u.plot_papers4decade(merged_df)
     
     # NOTE: Uncomment to filter all uppercase words, commonly author names
     # logger.info("Filtering uppercase tokens..")
@@ -162,16 +163,8 @@ def get_data2df(filename):
     
     # Creating DF subsets for each decade (cumulative, non-cumulative)
     logger.info("5-Cleaning data round 2...")
-    
-    intervals = np.arange(1750, 1806, 5)
-    decades = [f"{start}-{start+4}" for start in intervals[:-1]]
-    logger.debug(f'Decades: {decades}')
-    merged_df['decade'] = pd.cut(merged_df['year'], bins=intervals, labels=decades, right=False)
-    logger.debug(f'Merged DataFrame with decades: {merged_df.head(2).to_dict()}')
-    merged_df = merged_df.drop(columns=['year'])
-    logger.debug(f'Merged DataFrame shape after decade assignment: {merged_df.shape}')
-    logger.info("Creating subsets for each decade...")
-    
+    #decades = merged_df['decade'].unique() #NOTE: Changed this for target decades
+    decades = [1750, 1760, 1770, 1780, 1790, 1800]
     approach = ['w-past', 'wo-past']
     for decade in tqdm(decades, desc="Processing decades"):
         for app in tqdm(approach, leave=False):
