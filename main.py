@@ -7,12 +7,15 @@ from src.input_output import get_arguments
 from src.data_cleaning import get_data2df
 from src.tasks.classification.model import get_topics, get_topic_words
 from src.tasks.specialization.key_topics import get_key_topics
+from src.utils import plot_papers4decade
+from src.tasks.specialization.entropy import run_entropy_analysis
+from src.tasks.clustering.model import get_clusters
 
 # Set up logging configuration
 setup_logging()
 
-INPUT_FILEPATH = "data/rsc_v6_0_4_open_web-export.txt"
-
+INPUT_FILEPATH = "data/RSC604/rsc_v6_0_4_open_web-export.txt"
+DF_FILEPATH = "results/articles_16to18.csv"
 def main():
     # Set up logging configuration
     logger = logging.getLogger(__name__)
@@ -28,7 +31,9 @@ def main():
     tasks = ["tm-eval",
             "tm-topics",
             "specialization",
-            "data"]
+            "clustering",
+            "data",
+            "eda"]
     if task not in tasks:
         logger.error(f'Task {task} not recognized.')
         return
@@ -38,7 +43,8 @@ def main():
         logger.info("Topic modeling complete.")
     elif task == "tm-topics":
         logger.info("Getting topic words...")
-        get_topic_words()
+        #get_topic_words()
+        entropy_df = run_entropy_analysis()
         logger.info("Topic words extraction complete.")
     elif task == "specialization":
         get_key_topics()
@@ -46,6 +52,9 @@ def main():
         logger.info("Data preprocessing...")
         get_data2df(filename=input_file_path)
         logger.info("Data preprocessing complete.")
-
+    elif task == "eda":
+        plot_papers4decade(DF_FILEPATH)
+    elif task == "clustering":
+        get_clusters()
 if __name__ == '__main__':
     main()

@@ -14,7 +14,7 @@ import os
 import pandas as pd
 import numpy as np
 import scipy as sp
-from scipy.spatial import distance #REVIEW: this is JS Distance, the sqrt(JSD)
+from scipy.spatial import distance #NOTE: this is JS Distance, the sqrt(JSD)
 from sklearn.metrics.pairwise import cosine_similarity
 # Topic modeling
 from tmtoolkit.topicmod.model_stats import generate_topic_labels_from_top_words
@@ -175,7 +175,7 @@ def get_jsd_between_topics(doc_topic_distr, topic_labels_dict, results_dir, best
     # Compute pairwise JSD for topic distributions
     # Transpose to get (n_topics, n_documents) for computing distances between topics
     jsd_matrix = distance.pdist(doc_topic_distr.T, metric='jensenshannon') #NOTE: doc-topic distr is transposed to get the distances between topics instead of documents. For the knowledge graph, we would need the distances between documents instead.
-    jsd_matrix = distance.squareform(jsd_matrix)
+    jsd_matrix = distance.squareform(jsd_matrix) # condensed vector -> symmetric matrix
 
     logger.debug('Jensen-Shannon Divergence matrix shape: %s', jsd_matrix.shape)
 

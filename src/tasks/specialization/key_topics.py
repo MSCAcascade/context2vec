@@ -28,18 +28,10 @@ from scipy.cluster.hierarchy import linkage
 import plotly.express as px
 BEST_K = 6
 SAVE_PATH = 'results'
-
-<<<<<<< HEAD
 APP = 'wo-past'
 
 KEY_TOPICS_WPAST = {'1750': 'water', '1760': 'water', '1770': 'water', '1780': 'air', '1790': 'air', '1800': 'air'}
 KEY_TOPICS_WOPAST = {'1760': 'water', '1770': 'air', '1780': 'air', '1790': 'acid', '1800': 'acid'}
-=======
-APP = 'w-past'
-
-KEY_TOPICS_WPAST = {'1760': 'wind', '1770': 'wind', '1780': 'air', '1790': 'air', '1800': 'air'}
-KEY_TOPICS_WOPAST = {'1760': 'wind', '1770': 'air', '1780': 'air', '1790': 'acid', '1800': 'acid'}
->>>>>>> 7e347b6 (saved results)
 
 def get_key_topics():
     # Remove the approach loop and use only wo-past

@@ -1,4 +1,4 @@
-tmtoolkit[recommended,lda,sklearn,gensim,topic_modeling_eval_extra] == 0.11.2
+tmtoolkit[recommended,lda,sklearn,gensim] == 0.11.2
 numpy
 pandas
 scikit-learn
