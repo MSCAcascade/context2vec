@@ -9,7 +9,7 @@ from src.tasks.classification.model import get_topics, get_topic_words
 from src.tasks.specialization.key_topics import get_key_topics
 from src.utils import plot_papers4decade
 from src.tasks.specialization.entropy import run_entropy_analysis
-from src.tasks.clustering.hac import get_clusters
+from src.tasks.clustering.hac import get_clusters, get_acid_features
 
 # Set up logging configuration
 setup_logging()
@@ -55,7 +55,8 @@ def main():
     elif task == "eda":
         plot_papers4decade(DF_FILEPATH)
     elif task == "clustering":
-        get_clusters()
+        #get_clusters()
+        get_acid_features()
         
 if __name__ == '__main__':
     main()
