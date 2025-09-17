@@ -20,8 +20,60 @@ import pandas as pd
 import seaborn as sns
 #from igraph import arpack_options
 SAVE_PATH = "results"
-def get_temporal_graphs():
-    pass
+def get_wc():
+    from wordcloud import WordCloud
+    from PIL import Image
+    approach = ['w-past'] #TODO: add this to config file
+    decades = ['1750', '1760', '1770', '1780', '1790', '1800']
+    
+    for app in tqdm(approach, desc='Getting percentiles'):
+        root_dir = f'{SAVE_PATH}/{app}'
+        decade_dirs = os.listdir(root_dir) 
+        decade_dirs.sort() #NOTE: 1750->1800
+        
+        for decade in tqdm(decade_dirs, leave=False):
+            if decade in decades:
+                # Load topic words
+                filename = f'{root_dir}/{decade}/topics_2_30/topics_top_50_words.csv'
+                topic_word_df = pd.read_csv(filename)
+                # transpose df 
+                topic_word_df = topic_word_df.T
+                topic_word_df.columns = topic_word_df.iloc[0]
+                topic_word_df = topic_word_df.drop(topic_word_df.index[0])
+                
+                save_path = f'{root_dir}/{decade}/wordclouds'
+                os.makedirs(save_path, exist_ok=True)
+                for col in topic_word_df.columns:
+                    # Striṕ the cell value in two given the space
+                    matrix = topic_word_df[col].str.split(' ', expand=True)
+                    # Get words and probabilities
+                    words = list(matrix.iloc[:,0])
+                    probability = list(matrix.iloc[:,1])
+                    probability = [p.replace('(','').replace(')','') for p in probability]
+                    # Ṕrocess data
+                    dic = {'words':words,'probability':probability}
+                    df = pd.DataFrame(data=dic)
+                    df[["probability"]] = df[["probability"]].apply(pd.to_numeric)
+                    df = df.astype({"words": str, "probability": float})
+                    data = df.set_index('words').to_dict()['probability']
+
+                    # Create wordcloud
+                    mask = np.array(Image.open('images/brain.png')) #TODO: maybe change it later
+                    wc = WordCloud( max_words=1000, background_color="white", colormap='winter',
+                    mask=mask, max_font_size=256, width=mask.shape[1],
+                    height=mask.shape[0]).generate_from_frequencies(data)
+                    
+                    # Plot
+                    my_dpi = 92
+                    fig = plt.figure(figsize=(1000/my_dpi,1000/my_dpi),dpi=my_dpi)
+
+                    plt.imshow(wc, interpolation='bilinear')
+                    plt.axis('off')
+
+                    # Remove what's before the underscore in col
+                    col = col.split('_')[1] if '_' in col else col
+                    fig.savefig(f'{save_path}/wc_{col}',dpi=my_dpi * 10, bbox_inches='tight')
+                    plt.close()
 def get_percentiles():
     approach = ['wo-past'] #TODO: add this to config file
     decades = ['1750', '1760', '1770', '1780', '1790', '1800']
