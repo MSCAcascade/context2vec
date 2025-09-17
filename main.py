@@ -10,7 +10,7 @@ from src.tasks.specialization.key_topics import get_key_topics
 from src.utils import plot_papers4decade
 from src.tasks.specialization.entropy import run_entropy_analysis
 from src.tasks.clustering.hac import get_clusters, get_acid_features
-
+from src.tasks.linking.kg import get_percentiles
 # Set up logging configuration
 setup_logging()
 
@@ -32,6 +32,7 @@ def main():
             "tm-topics",
             "specialization",
             "clustering",
+            "linking",
             "data",
             "eda"]
     if task not in tasks:
@@ -57,6 +58,8 @@ def main():
     elif task == "clustering":
         #get_clusters()
         get_acid_features()
+    elif task == "linking":
+        get_percentiles()
         
 if __name__ == '__main__':
     main()

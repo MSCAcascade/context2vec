@@ -30,7 +30,7 @@ BEST_K = 6
 #TODO: refactor code so under each task folder: "main"-ordered functions, "model"-chosen model function, "hac"-selected approach, etc.
 
 def get_clusters():
-    approach = ['w-past'] #TODO: add this to config file
+    approach = ['w-past','wo-past'] #TODO: add this to config file
     decades = ['1750', '1760', '1770', '1780', '1790', '1800']
     
     for app in tqdm(approach, desc='Getting clusters'):

@@ -9,6 +9,8 @@ seaborn
 plotly
 kaleido
 umap-learn
+igraph
+pycairo
 
 # PyTorch ecosystem for GNN-LLM (CPU versions - install with CUDA separately)
 # torch>=2.0.0
