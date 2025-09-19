@@ -20,6 +20,55 @@ import pandas as pd
 import seaborn as sns
 #from igraph import arpack_options
 SAVE_PATH = "results"
+
+def get_acid_features(acid_authors_1790, acid_authors_1800):
+    # Load txt files
+    acid_1790_df = pd.read_csv(acid_authors_1790, sep='\t', header=None, names=['text_id', 'author'])
+    acid_1800_df = pd.read_csv(acid_authors_1800, sep='\t', header=None, names=['text_id', 'author'])
+    # Process author data
+    acid_1790_df = get_clean_authors(acid_1790_df)
+    acid_1800_df = get_clean_authors(acid_1800_df)
+    # Ensure authors data -> list 
+    acid_1790_authors = acid_1790_df['author'].tolist()
+    acid_1800_authors = acid_1800_df['author'].tolist()
+    # Find unique authors
+    total_authors = list(set(acid_1790_authors + acid_1800_authors))
+    # Plot authors in pie chart
+    author_counts_1790 = acid_1790_df['author'].value_counts()
+    author_counts_1800 = acid_1800_df['author'].value_counts()
+    # Combine counts into a single DataFrame
+    combined_counts = pd.DataFrame({
+        '1790': author_counts_1790,
+        '1800': author_counts_1800
+    }).fillna(0)
+    combined_counts = combined_counts.astype(int)
+    combined_counts['total'] = combined_counts['1790'] + combined_counts['1800']
+    combined_counts = combined_counts.sort_values(by='total', ascending=False)
+    top10_counts = combined_counts.head(10).drop(columns='total') 
+
+    # Plotting
+    plt.figure(figsize=(10, 8))
+    top10_counts.plot(kind='bar', stacked=True)
+    plt.title('Top-10 authors in "acid" topic')
+    plt.ylabel('papers')
+    plt.xticks(rotation=45, ha='right')
+    plt.legend(title='decade')
+    plt.tight_layout()
+    # Save plot
+    results_folder = 'results'
+    if not os.path.exists(results_folder):
+        os.makedirs(results_folder)
+    plot_path = os.path.join(results_folder, 'author_distribution_top10_1790_1800.png')
+    plt.savefig(plot_path)
+    logger.debug(f'Plot saved to {plot_path}')
+    plt.close()
+    
+    
+def get_clean_authors(df):
+    # Get the first author for each author in the authors column # TODO: later implement logic to account for multiple authors
+    df["author"] = df["author"].str.split("|").str[0].str.strip()
+    return df
+
 def get_wc():
     from wordcloud import WordCloud
     from PIL import Image

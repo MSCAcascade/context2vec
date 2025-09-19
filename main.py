@@ -10,7 +10,7 @@ from src.tasks.specialization.key_topics import get_key_topics
 from src.utils import plot_papers4decade
 from src.tasks.specialization.entropy import run_entropy_analysis
 from src.tasks.clustering.hac import get_clusters, get_acid_features
-from src.tasks.linking.kg import get_percentiles, get_wc 
+from src.tasks.linking.kg import get_percentiles, get_wc, get_acid_features
 # Set up logging configuration
 setup_logging()
 
@@ -60,6 +60,9 @@ def main():
         get_acid_features()
     elif task == "linking":
         #get_percentiles()
-        get_wc()
+        #get_wc()
+        acid_authors_1790 = 'results/wo-past/1790/hac/rsc_acid_authors_1790.txt'
+        acid_authors_1800 = 'results/wo-past/1800/hac/rsc_acid_authors_1800.txt'
+        get_acid_features(acid_authors_1790, acid_authors_1800)
 if __name__ == '__main__':
     main()
