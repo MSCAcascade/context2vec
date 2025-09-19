@@ -18,7 +18,14 @@ from igraph import *
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-#from igraph import arpack_options
+# PyTorch
+import torch
+from torch import Tensor
+from torch_geometric.nn import SAGEConv, to_hetero
+import torch.nn.functional as F
+from torch_geometric.data import HeteroData
+import torch_geometric.transforms as T
+
 SAVE_PATH = "results"
 
 def get_acid_features(acid_authors_1790, acid_authors_1800):
@@ -205,12 +212,17 @@ def get_percentiles():
                 pd.DataFrame({'membership': membership}).to_csv(f'{save_path}/community_membership.csv', index=False)
                 ## Comm metadata
                 num_nodes = Z.vcount()
-                
-                pd.DataFrame({'num_communities': [comm_len],
-                              'modularity': [comm_mod],
-                              'lattice_number': [lattice_number],
-                              'optimal_percolation': [opt_per], 
-                              'num_nodes': num_nodes}).to_csv(f'{save_path}/community_metadata.csv', index=False)
+                lcc_percent = lcc.vcount() / num_nodes  # lcc is from get_opt_graph
+
+                pd.DataFrame({
+                    'num_communities': [comm_len],
+                    'modularity': [comm_mod],
+                    'lattice_number': [lattice_number],
+                    'optimal_percolation': [opt_per], 
+                    'num_nodes': num_nodes,
+                    'lcc_percent': [lcc_percent]   # <-- add this line
+                }).to_csv(f'{save_path}/community_metadata.csv', index=False)
+
                 ## Edge index
                 edge_index = np.array([(e.source, e.target) for e in Z.es]).T  # shape: (2, num_edges)
                 edge_names = [(Z.vs[e.source]['name'], Z.vs[e.target]['name']) for e in Z.es]
@@ -281,3 +293,104 @@ def plot_graph(Z, comm_multi, save_path):
     pal = ig.drawing.colors.ClusterColoringPalette(len(comm_multi))
     Z.vs['color'] = pal.get_many(comm_multi.membership)
     ig.plot(Z,f'{save_path}/graph_communities.svg',layout = layout)
+
+
+def get_authors_matrix():
+    # # Load graph #NOTE: Uncomment to get node names
+    # g_file = 'results/wo-past/1800/kg/graph.gml'
+    # Z = load(g_file)
+    # # Get node names
+    # node_names = Z.vs['name']
+    # # Save node names in txt file
+    # with open('results/wo-past/1800/kg/graph_node_names.txt', 'w') as f:
+    #     for name in node_names:
+    #         f.write(f"{name}\n")
+    # logger.debug(f'Saved node names to results/wo-past/1800/kg/graph_node_names.txt')
+    # Load authors data
+    filename = 'results/wo-past/1800/kg/KG_1800_authors.txt'
+    authors_df = pd.read_csv(filename, sep='\t', header=None, names=['text_id', 'author'])
+    authors_df = get_clean_authors(authors_df)
+    authors_df = authors_df['author'].tolist()
+    # Create document-author matrix
+    unique_authors = list(set(authors_df))
+    doc_author_matrix = np.zeros((len(authors_df), len(unique_authors)), dtype=int)
+    author_index = {author: idx for idx, author in enumerate(unique_authors)}
+    for doc_idx, author in enumerate(authors_df):
+        if author in author_index:
+            author_idx = author_index[author]
+            doc_author_matrix[doc_idx, author_idx] = 1
+    # Save document-author matrix
+    save_path = 'results/wo-past/1800/kg'
+    u.save_dense_matrix(doc_author_matrix, f'{save_path}/doc_author_matrix.txt')
+    # Save author index
+    with open(f'{save_path}/doc_author_matrix_columns.txt', 'w') as f:
+        for idx, author in enumerate(unique_authors):
+            f.write(f"{idx}\t{author}\n")
+
+    
+    
+    
+
+# GNN ref: https://colab.research.google.com/drive/1r_FWLSFf9iL0OWeHeD31d_Opt031P1Nq?usp=sharing
+class GNN(torch.nn.Module):
+    def __init__(self, hidden_channels):
+        super().__init__()
+
+        self.conv1 = SAGEConv(hidden_channels, hidden_channels)
+        self.conv2 = SAGEConv(hidden_channels, hidden_channels)
+
+    def forward(self, x: Tensor, edge_index: Tensor) -> Tensor:
+        x = F.relu(self.conv1(x, edge_index))
+        x = self.conv2(x, edge_index)
+        return x
+
+# Our final classifier applies the dot-product between source and destination
+# node embeddings to derive edge-level predictions:
+class Classifier(torch.nn.Module):
+    def forward(self, x_user: Tensor, x_movie: Tensor, edge_label_index: Tensor) -> Tensor:
+        # Convert node embeddings to edge-level representations:
+        edge_feat_user = x_user[edge_label_index[0]]
+        edge_feat_movie = x_movie[edge_label_index[1]]
+
+        # Apply dot-product to get a prediction per supervision edge:
+        return (edge_feat_user * edge_feat_movie).sum(dim=-1)
+
+
+# class Model(torch.nn.Module):
+#     def __init__(self, hidden_channels):
+#         super().__init__()
+#         # Since the dataset does not come with rich features, we also learn two
+#         # embedding matrices for users and movies:
+#         self.movie_lin = torch.nn.Linear(20, hidden_channels)
+#         self.user_emb = torch.nn.Embedding(data["user"].num_nodes, hidden_channels)
+#         self.movie_emb = torch.nn.Embedding(data["movie"].num_nodes, hidden_channels)
+
+#         # Instantiate homogeneous GNN:
+#         self.gnn = GNN(hidden_channels)
+
+#         # Convert GNN model into a heterogeneous variant:
+#         self.gnn = to_hetero(self.gnn, metadata=data.metadata())
+
+#         self.classifier = Classifier()
+
+#     def forward(self, data: HeteroData) -> Tensor:
+#         x_dict = {
+#           "user": self.user_emb(data["user"].node_id),
+#           "movie": self.movie_lin(data["movie"].x) + self.movie_emb(data["movie"].node_id),
+#         } 
+
+#         # `x_dict` holds feature matrices of all node types
+#         # `edge_index_dict` holds all edge indices of all edge types
+#         x_dict = self.gnn(x_dict, data.edge_index_dict)
+#         pred = self.classifier(
+#             x_dict["user"],
+#             x_dict["movie"],
+#             data["user", "rates", "movie"].edge_label_index,
+#         )
+
+#         return pred
+
+        
+# model = Model(hidden_channels=64)
+
+# logger.info(f'Model details: {model}')
