@@ -30,7 +30,7 @@ BEST_K = 6
 #TODO: refactor code so under each task folder: "main"-ordered functions, "model"-chosen model function, "hac"-selected approach, etc.
 
 def get_clusters():
-    approach = ['w-past']
+    approach = ['w-past','wo-past'] #TODO: add this to config file
     decades = ['1750', '1760', '1770', '1780', '1790', '1800']
     
     for app in tqdm(approach, desc='Getting clusters'):
@@ -126,31 +126,6 @@ def get_umap(doc_topic_distr, topic_cluster_df, save_path):
     topic_cluster_df.to_csv(f'{save_path}/topic_cluster_umap_df.csv', index=False)
     return topic_cluster_df
 
-# def get_umap_plot(umap_df, save_path):
-#     """ Create UMAP plot.
-#     Args:
-#         None
-#     Returns:
-#         None
-#     """
-#     plt.figure(figsize=(12,12))
-#     ax = sns.scatterplot(data=umap_df,
-#                                 x='x',
-#                                 y='y',
-#                                 hue='cluster',
-#                                 style='topic',
-#                                 palette='Set2',
-#                                 s=20,
-#                                 ec='black')
-    
-#     ax.set(xlabel=None, ylabel=None)
-#     ax.set_aspect('equal', 'datalim')
-
-#     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-#     plt.xticks([])
-#     plt.yticks([])
-#     ax.get_figure().savefig(f'{save_path}/umap.png', bbox_inches='tight')
-
 def get_umap_plot(umap_df, save_path, topic_labels_dict):
     """ Create UMAP plot with clusters only, and annotate centroids with topic label. """
     plt.figure(figsize=(12,12))
@@ -235,3 +210,37 @@ def describe_clusters(df, save_path):
     # max_min_df.to_csv('results/hac/max_min_topic_per_cluster.csv')
     # logger.info('Saved max and min topic for each cluster in results/hac/max_min_topic_per_cluster.csv')
     # logger.info('Saved cluster topic distribution plot in results/hac/cluster_topic_distribution.png')
+
+def get_acid_features():
+    approach = ['w-past', 'wo-past']
+    decades = ['1750', '1760', '1770', '1780', '1790', '1800']
+    
+    for app in tqdm(approach, desc='Getting clusters'):
+        root_dir = f'{SAVE_PATH}/{app}'
+        decade_dirs = os.listdir(root_dir) 
+        decade_dirs.sort() #NOTE: 1750->1800
+        
+        for decade in tqdm(decade_dirs, leave=False):
+            if decade in decades:
+                # Get doc labels
+                filename = f'{root_dir}/{decade}/df_{decade}.csv'
+                df = pd.read_csv(filename)
+                text_ids = df['text_id'].tolist()
+                logger.info(f'Number of documents in corpus: {len(text_ids)}')
+                # Get doc clusters
+                filename = f'{root_dir}/{decade}/hac/topic_cluster_umap_df.csv'
+                cluster_df = pd.read_csv(filename)
+                logger.info(f'Number of documents in cluster df: {cluster_df.shape[0]}')
+                # Create new df: text_ids, topic, cluster
+                combined_df = pd.DataFrame({'text_id': text_ids,
+                                            'topic': cluster_df['topic'],
+                                            'cluster': cluster_df['cluster']})
+                # Remove rows which topic isn't 'acid'
+                # combined_df = combined_df[combined_df['topic'].str.contains('acid', case=False)] # TODO: later automate this
+                # logger.info(f'Number of documents in combined df after filtering for "acid" topic: {combined_df.shape[0]}')
+                # Save combined df
+                save_path = f'{root_dir}/{decade}/hac/textId_topics.csv'
+                combined_df.to_csv(save_path, index=False)
+                
+                
+    # get doc labels
