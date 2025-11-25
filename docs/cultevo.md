@@ -4,9 +4,10 @@ Main task: explain how contextual factors interactions drive conceptual change, 
 
 Subtasks:
 1. Localization.
-2. Knowledge Entities & Relations Extraction.
-3. Knowledge Graph Construction.
-4. Knowledge Graph Reasoning.
+2. Key features extraction.
+3. Graph construction.
+4. Clustering.
+5. Story formation.
 
 # Work Environment
 - [ ] Python environment: requirements.txt
@@ -32,10 +33,18 @@ Subtasks:
 # Prepare data
 - [ ] Prepare data
 	- [ ] Processing documents
+		- [ ] Operationalizations: key document, token
+			- [ ] #REVIEW Are key documents those with (1) words ~high KLD scores, (2) sentences ~high KLD scores, (3) publication dates ~key events, (4) renowned authors, (5) high citation count? 
 		- [ ] Document filtering
+			- [ ] Define target period
+				- RSCV6.0.4: 1665-1920
+				- SemanticScholar: 1931-today
 		- [ ] Word segmentation
+
 	- [ ] Keyword extraction
-		- [ ] Extract word features
+		- [ ] Operationalizations: word features, keyword
+			- [ ] #REVIEW What (dynamic, context-sensitive) word features increase localization of cultural artifacts? 
+		- [ ] Extract a variety of word features
 		- [ ] Classify whether each word is a keyword
 # Keyword graph
 - [ ] Keyword graph
