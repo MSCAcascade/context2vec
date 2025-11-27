@@ -1,12 +1,11 @@
-# On the evolution of scientific concepts
+# On the formation of literary canons
 
-Main task: explain how contextual factors interactions drive conceptual change, why these dynamics evaluate scientific progress and forecast research trends
+Main task: What are the measurable features that characterize which works are likely to be canonized?
 
 Subtasks:
-1. Localization.
-2. Knowledge Entities & Relations Extraction.
-3. Knowledge Graph Construction.
-4. Knowledge Graph Reasoning.
+1. Syntactic complexity
+2. Semantic complexity
+3. Narrative complexity
 
 # Work Environment
 - [ ] Python environment: requirements.txt
@@ -29,7 +28,22 @@ Subtasks:
 (later) for interactivity
 - [ ] Web application: Django, Vue
 
-# 1. Localization
-# 2. Knowledge Entities & Relations Extraction.
-# 3. Knowledge Graph Construction.
-# 4. Knowledge Graph Reasoning.
+# 1. Syntactic complexity
+- [ ] syntactic complexity
+	- [ ] PMI
+	- [ ] pointwise-KLD
+	- [ ] surprisal
+# 2. Semantic complexity
+- [ ] semantic complexity
+	- [ ] temporal LDA --only NN for now
+		- [ ] topic clusters
+		- [ ] network analysis
+	- [ ] temporal word embeddings
+		- [ ] paradigmatic productivity
+		- [ ] syntagmatic productivity
+		- [ ] typicality
+	- [ ] temporal context embeddings
+# 3. Narrative complexity
+- [ ] narrative complexity
+	- [ ] character network analysis
+	- [ ] sentiment analysis

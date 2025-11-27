@@ -4,10 +4,10 @@ Main task: explain how contextual factors interactions drive conceptual change, 
 
 Subtasks:
 1. Localization.
-2. Key features extraction.
-3. Graph construction.
+2. Prepare data.
+3. Construct graph.
 4. Clustering.
-5. Story formation.
+5. Grow stories.
 
 # Work Environment
 - [ ] Python environment: requirements.txt
@@ -65,7 +65,7 @@ Subtasks:
 	- [ ] Influencers-influencee processing
 		- [ ] Get in-text PN & authors per doc
 		- [ ] Get author adj. matrix
-# Graph construction
+# Construct graph
 - [ ] Keyword co-occurrence
 	- [ ] Construct keyword graph
 		- [ ] Construct or update keyword graph by keyword co-occurrence in new incoming documents
@@ -76,7 +76,7 @@ Subtasks:
 - [ ] Topic correlation
 	- [ ] Get docs adj. matrix based on doc-topic distr. JS distance
 	- [ ] Get HAC 
-# Network analysis
+# Clustering
 - [ ] Cluster events
 	- [ ] Keyword co-occurrence
 		- [ ] First layer clustering
