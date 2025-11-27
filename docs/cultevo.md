@@ -44,6 +44,18 @@ Subtasks:
 				- HP cascades
 	- [ ] Event processing
 		- [ ] Define events
+			- [ ] Scientific
+				- oxygen
+				- radiation
+				- nebulae
+				- evolution
+			#REVIEW **For future work**, represent this contextual information so the heterogenous graph trains the node embeddings with it, and the agent can access it
+			- [ ] Historical
+				- God -> Nature
+				- War, gun
+				- Famine
+			- [ ] Epidemiological
+				- Disease, Pox
 			#REVIEW List discoveries reported in the RSC
 		- [ ] Define keywords & influencers-influencee per event
 	- [ ] Keyword processing
