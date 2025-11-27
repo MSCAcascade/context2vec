@@ -46,6 +46,7 @@ Subtasks:
 		- [ ] Define events
 			- [ ] Scientific
 				- oxygen
+				#TODO how to localize/filter doc/word features for the following scenarios?
 				- radiation
 				- nebulae
 				- evolution
