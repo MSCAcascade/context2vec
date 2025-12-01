@@ -16,6 +16,10 @@ Subtasks:
 - [ ] MVP PPT: jupyter notebook
     - [ ] local: create it and send to Stefania
 
+- [ ] Backup data & results
+	- [x] Personal & work laptops using Syncthing
+	- [x] OneDrive
+
 (later) for functionality
 - [ ] Validate CLI tool execution: argparse, config.py
     - More info: 

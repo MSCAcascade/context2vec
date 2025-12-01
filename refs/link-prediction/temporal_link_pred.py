@@ -18,7 +18,7 @@ dataset = MovieLens(path, model_name='all-MiniLM-L6-v2')
 data = dataset[0]
 
 # Add user node features for message passing:
-data['user'].x = torch.eye(data['user'].num_nodes, device=device)
+data['user'].x = torch.eye(data['user'].num_nodes, device=device) #TODO: Review this "eye" method
 del data['user'].num_nodes
 
 # Add a reverse ('movie', 'rev_rates', 'user') relation for message passing:
@@ -27,7 +27,7 @@ del data['movie', 'rev_rates', 'user'].edge_label  # Remove "reverse" label.
 
 # Perform a 80/10/10 temporal link-level split:
 perm = torch.argsort(data['user', 'movie'].time)
-train_idx = perm[:int(0.8 * perm.size(0))]
+train_idx = perm[:int(0.8 * perm.size(0))] #TODO: Review how this split is done
 val_idx = perm[int(0.8 * perm.size(0)):int(0.9 * perm.size(0))]
 test_idx = perm[int(0.9 * perm.size(0)):]
 
@@ -40,7 +40,7 @@ kwargs = dict(
     temporal_strategy='last',
     num_workers=4,
     persistent_workers=True,
-)
+)#TODO: Review parameters after batch_size
 train_loader = LinkNeighborLoader(
     edge_label_index=(('user', 'movie'), edge_index[:, train_idx]),
     edge_label=data['user', 'movie'].edge_label[train_idx],
