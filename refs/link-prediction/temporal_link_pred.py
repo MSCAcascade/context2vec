@@ -1,5 +1,9 @@
 ## Retrieved from: https://github.com/pyg-team/pytorch_geometric/blob/master/examples/hetero/temporal_link_pred.py (27.11.25)
 
+# pyg-lib 0.4.0
+# pytorch 2.1.0
+# torch-geometric 2.6.1
+
 import os.path as osp
 
 import torch
@@ -41,6 +45,7 @@ kwargs = dict(
     num_workers=4,
     persistent_workers=True,
 )#TODO: Review parameters after batch_size
+
 train_loader = LinkNeighborLoader(
     edge_label_index=(('user', 'movie'), edge_index[:, train_idx]),
     edge_label=data['user', 'movie'].edge_label[train_idx],
