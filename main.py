@@ -9,9 +9,9 @@ from src.tasks.classification.model import get_topics, get_topic_words
 from src.tasks.specialization.key_topics import get_key_topics
 from src.utils import plot_papers4decade
 from src.tasks.specialization.entropy import run_entropy_analysis
-from src.tasks.clustering.hac import get_clusters, get_acid_features
-from src.tasks.linking.kg import get_percentiles, get_wc, get_acid_features, get_authors_matrix
-from src.tasks.linking.get_links import trainer
+# from src.tasks.clustering.hac import get_clusters, get_acid_features
+# from src.tasks.linking.kg import get_percentiles, get_wc, get_acid_features, get_authors_matrix
+# from src.tasks.linking.get_links import trainer
 # Set up logging configuration
 setup_logging()
 

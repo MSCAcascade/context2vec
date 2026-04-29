@@ -165,16 +165,23 @@ def run_entropy_analysis():
         entropy_df.to_csv(entropy_df_path, index=False)
         logger.info(f'Saved entropy results to {entropy_df_path}')
         # Plot entropy values
-        plt.figure(figsize=(9, 6))
+        plt.figure(figsize=(9, 6)) #NOTE: pixels width = 300 dpi * 9 inch = 2700 px
+        line_styles = ['-', '--', '-.', ':']
+        count = 0
         for label in entropy_df['target_label'].unique():
             subset = entropy_df[entropy_df['target_label'] == label]
-            plt.plot(subset['year'], subset['shannon_entropy'], marker='o', label=label)
-        plt.title(f'Topic entropy ({app})', fontsize=16)
+            plt.plot(subset['year'],
+                     subset['shannon_entropy'],
+                     marker='o',
+                     label=label,
+                     linestyle=line_styles[count]) #NOTE: default linewidth = 1.5
+            count += 1
+        #plt.title(f'Topic entropy ({app})', fontsize=16)
         plt.xlabel('decade', fontsize=14)
         plt.ylabel('entropy', fontsize=14)
         # Set x-ticks to show all decades in your data
         unique_decades = sorted(entropy_df['year'].unique())
-        plt.xticks(unique_decades, fontsize=12, rotation=45)
+        plt.xticks(unique_decades, fontsize=12)
         plt.yticks(fontsize=12)
         plt.grid()
         plt.tight_layout()
@@ -182,7 +189,7 @@ def run_entropy_analysis():
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
         plot_path = f'{SAVE_PATH}/entropy_plot_{app}.png'
-        plt.savefig(plot_path)
+        plt.savefig(plot_path, dpi=300)
         logger.info(f'Saved entropy plot to {plot_path}')
         plt.close()
     return entropy_df

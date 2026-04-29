@@ -17,7 +17,7 @@ import scipy as sp
 from scipy.spatial import distance 
 # Clustering
 from sklearn.cluster import AgglomerativeClustering
-import umap
+#import umap
 # Visualization
 import matplotlib.pyplot as plt
 import pandas as pd

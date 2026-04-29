@@ -13,18 +13,18 @@ import pandas as pd
 import numpy as np
 np.random.seed(42)
 np.set_printoptions(precision=5)
-from igraph import *
+#from igraph import *
 # Visualization
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 # PyTorch
-import torch
-from torch import Tensor
-from torch_geometric.nn import SAGEConv, to_hetero
-import torch.nn.functional as F
-from torch_geometric.data import HeteroData
-import torch_geometric.transforms as T
+# import torch
+# from torch import Tensor
+# from torch_geometric.nn import SAGEConv, to_hetero
+# import torch.nn.functional as F
+# from torch_geometric.data import HeteroData
+# import torch_geometric.transforms as T
 
 SAVE_PATH = "results"
 
@@ -331,29 +331,29 @@ def get_authors_matrix():
     
     
 
-# GNN ref: https://colab.research.google.com/drive/1r_FWLSFf9iL0OWeHeD31d_Opt031P1Nq?usp=sharing
-class GNN(torch.nn.Module):
-    def __init__(self, hidden_channels):
-        super().__init__()
+# # GNN ref: https://colab.research.google.com/drive/1r_FWLSFf9iL0OWeHeD31d_Opt031P1Nq?usp=sharing
+# class GNN(torch.nn.Module):
+#     def __init__(self, hidden_channels):
+#         super().__init__()
 
-        self.conv1 = SAGEConv(hidden_channels, hidden_channels)
-        self.conv2 = SAGEConv(hidden_channels, hidden_channels)
+#         self.conv1 = SAGEConv(hidden_channels, hidden_channels)
+#         self.conv2 = SAGEConv(hidden_channels, hidden_channels)
 
-    def forward(self, x: Tensor, edge_index: Tensor) -> Tensor:
-        x = F.relu(self.conv1(x, edge_index))
-        x = self.conv2(x, edge_index)
-        return x
+#     def forward(self, x: Tensor, edge_index: Tensor) -> Tensor:
+#         x = F.relu(self.conv1(x, edge_index))
+#         x = self.conv2(x, edge_index)
+#         return x
 
-# Our final classifier applies the dot-product between source and destination
-# node embeddings to derive edge-level predictions:
-class Classifier(torch.nn.Module):
-    def forward(self, x_user: Tensor, x_movie: Tensor, edge_label_index: Tensor) -> Tensor:
-        # Convert node embeddings to edge-level representations:
-        edge_feat_user = x_user[edge_label_index[0]]
-        edge_feat_movie = x_movie[edge_label_index[1]]
+# # Our final classifier applies the dot-product between source and destination
+# # node embeddings to derive edge-level predictions:
+# class Classifier(torch.nn.Module):
+#     def forward(self, x_user: Tensor, x_movie: Tensor, edge_label_index: Tensor) -> Tensor:
+#         # Convert node embeddings to edge-level representations:
+#         edge_feat_user = x_user[edge_label_index[0]]
+#         edge_feat_movie = x_movie[edge_label_index[1]]
 
-        # Apply dot-product to get a prediction per supervision edge:
-        return (edge_feat_user * edge_feat_movie).sum(dim=-1)
+#         # Apply dot-product to get a prediction per supervision edge:
+#         return (edge_feat_user * edge_feat_movie).sum(dim=-1)
 
 
 # class Model(torch.nn.Module):
