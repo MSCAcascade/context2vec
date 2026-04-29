@@ -6,7 +6,7 @@ Abstract
 > While context embeddings produced by LLMs can be used to estimate conceptual change, these representations are often not interpretable nor time-aware. Moreover, bias augmentation in historical data poses a non-trivial risk to researchers in the Digital Humanities. Hence, to model reliable concept trajectories in evolving scholarship, in this work we develop a framework that represents prototypical concepts through complex networks based on topics. Utilizing the Royal Society Corpus, we analyzed two competing theories from the Chemical Revolution (phlogiston vs. oxygen) as a case study to show that onomasiological change is linked to higher entropy and topological density, indicating increased diversity of ideas and connectivity effort.
 
 Inputs: [Royal Society Corpus](https://fedora.clarin-d.uni-saarland.de/rsc_v6/)
-Outputs: Zenodo (tba)
+Outputs: [Zenodo](https://zenodo.org/records/19886027)
 
 ## Usage
 
